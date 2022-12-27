@@ -1,0 +1,7 @@
+img.card-img-top{
+    height: 150px;
+    object-fit: contain;
+}
+img.img-product{
+    height: 250px;
+}

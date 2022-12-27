@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./parts/header') %> 
+<body>    
+    <%- include('./parts/navbar') %> 
+    <div class="container">
+        <form action="/" method="GET" class="mt-5">
+            <select name="category" class="form-control">
+                <option value="all">All</option>
+                <option value="clothes">Clothes</option>
+                <option value="phones">Phone</option>
+                <option value="shoes">Shoes</option>
+            </select>
+            <input type="submit" value="Filter" class="btn btn-primary mt-3">
+        </form>
+
+        <% if(validationErr){ %> 
+            <p class="alert alert-danger my-3"><%= validationErr.msg %></p> 
+        <% } %> 
+
+
+        <div class="row mt-5">
+            <% if(products.length !== 0){ %> 
+                <% products.map(product => { %>
+                <div class="col col-12 col-md-6 col-lg-4 col-xl-3 mb-3">
+                 <div class="card p-2">
+                     <img src="<%= product.image %>" class="card-img-top" alt="">
+                     <div class="card-body">
+                           <h5 class="card-title">
+                              <a href="/product/<%= product._id %>"><%= product.name %></a>
+                               <p class="mt-2">Price: <%= product.price %> </p>
+                            </h5>
+                            <form action="/cart" method="post" class="add-to-cart-form">
+                               <input type="number" name="amount" class="form-control my-2">
+                               <input type="hidden" name="name" value="<%= product.name %>">
+                               <input type="hidden" name="price" value="<%= product.price %>">
+                               <input type="hidden" name="productId" value="<%= product._id %>">
+                               <input type="hidden" name="email" value="<%= email %>">
+                               <input type="hidden" name="redirectTo" value="/">
+                               <input type="submit" value="add to cart" class="btn btn-primary d-flex mx-auto">
+                            </form>
+                        </div>
+                   </div>
+              </div>
+         <% })}else{ %>
+                <div class="alert alert-danger">You don't have a products</div>
+            <% } %>  
+     </div>
+    </div>
+    <%- include('./parts/footer') %> 
+</body>
+</html>

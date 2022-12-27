@@ -1,0 +1,36 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar') %>
+
+<div class="container">
+    <% if(items.length === 0){ %>
+        <p class="alert alert-danger">there is no item in cart</p>
+    <% }else{ %>
+        <table class="table">
+            <thead>
+                <td>no</td>
+                <td>product name</td>
+                <td>price</td>
+                <td>amount</td>
+                <td>Total</td>
+            </thead>
+            <tbody>
+                <% items.map((item, ind) => { %>
+                    <tr>
+                        <td><%= ind + 1 %> </td>
+                        <td><%= item.name %> </td>
+                        <td><%= item.price %> </td>
+                        <form method="POST">
+                            <td><input type="text" name="amount" class="form-control" value="<%= item.amount %>"></td>
+                            <td>
+                                <input type="hidden" name="cartId" value="<%= item._id %>">
+                                <input type="submit" value="Save" class="btn btn-success" formaction="/cart/save">
+                                <input type="submit" value="Delete" class="btn btn-danger" formaction="/cart/delete">
+                            </td>
+                        </form>
+                    </tr> 
+                    <% }) %> 
+            </tbody>
+        </table>
+    
+    <% } %>   
+</div>

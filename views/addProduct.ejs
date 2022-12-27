@@ -1,0 +1,26 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar') %>
+<div class="container">
+    <h3 class="text-center mt-3 mb-2">Add Product</h3>
+    <form method="post" action="/admin/add" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="name" class="form-control">
+        <% let nameErr = validationErr.find(err => err.param === 'name') %> 
+        <% if(nameErr) {%>
+            <p class="alert alert-danger"><%= nameErr.msg %> </p> 
+        <% } %> 
+        <input type="number" name="price" class="form-control my-2" placeholder="price">
+        <% let priceErr = validationErr.find(err => err.param === 'price') %> 
+        <% if(priceErr) {%>
+            <p class="alert alert-danger"><%= priceErr.msg %> </p> 
+        <% } %>
+        <textarea name="description" class="form-control my-2" placeholder="description"></textarea>
+        <select name="category" class="form-control">
+            <option value="" disabled>Choose category</option>
+            <option value="clothes">clothes</option>
+            <option value="phones">phones</option>
+            <option value="shoes">computer</option>
+        </select>
+        <input type="file" name="image" class="form-control my-2" placeholder="image">
+        <input type="submit" value="Add Product" class="btn btn-primary mt-2 mx-auto">
+    </form>
+</div>

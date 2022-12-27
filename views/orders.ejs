@@ -1,0 +1,41 @@
+<%- include('parts/header') %> 
+<%- include('parts/navbar') %>
+<div class="container">
+    <form action="/admin/orders" method="GET" class="mt-5">
+        <select name="category" class="form-control">
+            <option value="all">All</option>
+            <option value="pending">Pending orders</option>
+            <option value="done">Orders Done</option>
+        </select>
+        <input type="submit" value="Filter" class="btn btn-primary mt-3">
+    </form>
+    <table class="table mt-4">
+        <thead>
+            <td>Email</td>
+            <td>product name</td>
+            <td>amount</td>
+            <td>status</td>
+            <td></td>
+            <td>Total</td>
+        </thead>
+        <tbody>
+            <% carts.map((cart, ind) => { %>
+                <tr>
+                    
+                    <td><%= cart.userEmail %> </td>
+                    <td><%= cart.name %> </td>
+                    <td><%= cart.amount %> </td>
+                    <form method="POST">
+                        <td><input type="text" name="status" class="form-control" value="<%= cart.status %>"></td>
+                        <td>
+                            <input type="hidden" name="cartId" value="<%= cart._id %>">
+                            <input type="submit" value="Save" class="btn btn-success" formaction="/orders/save">
+                        </td>
+                    </form>
+                    <td><%= cart.amount * cart.price %> </td>
+                </tr> 
+                <% }) %>
+        </tbody>
+    </table>
+</div> 
+<%- include('parts/footer') %> 

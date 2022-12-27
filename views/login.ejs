@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./parts/header') %> 
+</head>
+<body>
+    <%- include('./parts/navbar') %>
+    
+    <div class="container text-center mt-3">
+        <h3>Login</h3>
+        <form action="/login" method="post">
+            <input type="email" class="form-control" name="email" placeholder="email">
+            <% loginErr.find(err => { %>
+                <% if(err.param === 'email'){ %>
+                        <p class="alert alert-danger"><%= err.msg %> </p>
+                    <% } %>
+            <% }) %>  
+            <input type="password" class="form-control" name="password" placeholder="password">
+            <% loginErr.find(err => { %>
+                <% if(err.param === 'password'){ %>
+                        <p class="alert alert-danger"><%= err.msg %> </p>
+                    <% } %>
+            <% }) %>
+            <input type="submit" value="Login" class="btn btn-primary my-2">
+        </form>
+        <% if(authError){ %>
+            <p class="alert alert-danger">{<%= authError %> }</p>
+        <% } %>  
+        </p>
+        <div class="text-center">
+            already have an acoount <a href="/login">Login</a>
+        </div>
+    </div>
+    
+    <%- include('./parts/footer') %> 
+</body>
+</html>
