@@ -7,7 +7,6 @@ const authRouter = require('./routes/authRouter');
 const cartRouter = require('./routes/cart.route');
 const adminRouter = require('./routes/adminRouter');
 const flash = require('connect-flash');
-//const dbURL = 'mongodb+srv://hussein:python1221@cluster0.3tqmdlo.mongodb.net/online-shop';
 
 const session = require('express-session')
 const SessionStore = require('connect-mongodb-session')(session);
@@ -22,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'images')))
 app.use(flash())
 
 const STORE = new SessionStore({
-    uri: 'mongodb+srv://hussein:python1221@cluster0.3tqmdlo.mongodb.net/online-shop',
+    uri: '',
     collection: 'session'
 })
 
